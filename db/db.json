@@ -1,1 +1,6 @@
-[{"title":"Test Title","text":"Test text"}]
+[
+    {"title":"groceries","text":"milk, eggs, bread"} ,
+    {"title":"study","text":"practice mySQL"} ,
+    {"title":"remember...","text":"don't panic."}   
+
+]
