@@ -8,15 +8,6 @@ const PORT = process.env.PORT || 3000;
 const apiRoutes = require("./routes/api");
 const htmlRoutes = require("./routes/htmlRoutes");
 
-//display data (notes from database)
-    //display in a json format 
-
-//addNotes - based on user input 
-
-//delete notes - from page and and database 
-
-//app.use
-
 //utilize the json function from express
 app.use(express.json());
 //more middleware
@@ -33,7 +24,7 @@ app.use("/", htmlRoutes);
 
 
 app.listen(PORT, () => {
-    console.log(`note taker app is now listening on port ${PORT}...`);
+    console.log(`note-taker is now listening on port ${PORT}...`);
 })
 
 
