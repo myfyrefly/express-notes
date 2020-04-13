@@ -1,9 +1,8 @@
-let sample = require('../db/dataCreation.js');
 //express has a router ()
 var router = require('express').Router(); 
 //utilize the get()
-
-router.get('/notes', (req, res) => {
+let sample = require('../db/dataCreation.js');
+router.get('/notes', function (req, res) {
     sample
         .getNotes()
         .then(notes => res.json(notes))  
@@ -11,20 +10,23 @@ router.get('/notes', (req, res) => {
 });
 
 //utilize post()
-router.post('/addnotes', (req, res) => {
+router.post('/notes', (req, res) => {
     sample
-        .addNotes()
-        .then(note => res.json(note))
+    //paramater - 
+        .addNote(req.body)
+        .then((note) => res.json(note))
+        .catch(err => res.status(500).json(err))
 }); 
 
 
 //utilize the delete()
-router.delete('/notes/:id', (req, res) => {
+router.delete('/notes/:id',function  (req, res)  {
     sample
-        .removeNotes()
+        .deleteNote(req.params.id)
         .then(() => {
             res.json({ok: true});
         })
+        .catch(err => res.status(500).json(err))
         
 });
 

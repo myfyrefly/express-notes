@@ -7,9 +7,9 @@ const uuidv1 = require('uuid/v1');
 
 
 //utilize readfileAsync
-const readFile = util.promisify(fs.readFile);
+const readfileAsync = util.promisify(fs.readFile);
 //utilize writeFileAsync
-const writeFile = util.promisify(fs.writeFile);
+const writeFileAsync = util.promisify(fs.writeFile);
 //create a class called Sample {
 //that read() writes() getNotes() addNotes() removesNotes()
 //    }
@@ -17,10 +17,10 @@ const writeFile = util.promisify(fs.writeFile);
 
 class Sample { 
     readNotes() {
-    return readFile('db/db.json', 'utf8');
+    return readfileAsync('db/db.json', 'utf8');
     }
     writeNote(note){
-        return writeFile('db/db.json', Json.stringify(note));
+        return writeFileAsync('db/db.json', Json.stringify(note));
     }
     getNotes() {
         return this.readNotes()
@@ -51,6 +51,13 @@ class Sample {
           //reutilize the getNotes function - afterwards promise to add the new note, write the updated new note and return the note
           //three promises all together
 
+    }
+
+//this function will allow for deletion based on the id implemented 
+    deleteNote(id) {
+        return this.getNotes()
+        .then(notes => notes.filter(note => note.id !== id))
+        .then(filteredNotes => this.writeNote(filteredNotes))
     }
 }
 
